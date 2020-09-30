@@ -6,18 +6,22 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import React from 'react';
-import './styles/app.css';
-import ReactDOM from 'react-dom'
-
+import React from "react";
+import "./styles/app.css";
+import ReactDOM from "react-dom";
+import Navbar from "./components/Navbar";
 
 console.log("hello World !!!");
 
 const App = () => {
-    return <h1>Bonjour</h1>
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 };
 
 const rootElement = document.querySelector("#app");
-ReactDOM.render(<App />, rootElement)
+ReactDOM.render(<App />, rootElement);
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';
