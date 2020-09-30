@@ -10,14 +10,24 @@ import React from "react";
 import "./styles/app.css";
 import ReactDOM from "react-dom";
 import Navbar from "./components/Navbar";
+import { HashRouter, Switch, Route } from "react-router-dom";
+import ListMovie from "./pages/ListMovie";
+import HomePage from "./pages/HomePage";
 
 console.log("hello World !!!");
 
 const App = () => {
   return (
-    <>
+    <HashRouter>
       <Navbar />
-    </>
+
+      <main className="container pt-5">
+        <Switch>
+          <Route path="/homepage" component={HomePage}></Route>
+          <Route path="/list" component={ListMovie}></Route>
+        </Switch>
+      </main>
+    </HashRouter>
   );
 };
 

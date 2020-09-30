@@ -5,3 +5,20 @@
   background-size: 100%;
   background-repeat: no-repeat;
 }
+.navbar-dark .navbar-nav .nav-link {
+  color: #dc1a28;
+}
+.text-red {
+  color: #dc1a28;
+}
+.card_movie {
+  width: 200px;
+  height: 350px;
+  background-color: aliceblue;
+  margin-bottom: 15px;
+}
+.grid_ctn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
