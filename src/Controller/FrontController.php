@@ -29,7 +29,7 @@ class FrontController extends AbstractController
         $apiKeys = $this->getParameter('app.api_omdb_key');
         $baseUri = "http://www.omdbapi.com/";
         $response = $this->client->request('GET', $baseUri . '?apikey=' . $apiKeys . '&type=movie&s=digital&school');
-        dump($response->getContent());
+        dump($response);
 
 
 
