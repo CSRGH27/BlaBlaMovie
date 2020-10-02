@@ -14,8 +14,6 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import ListMovie from "./pages/ListMovie";
 import HomePage from "./pages/HomePage";
 
-console.log("hello World !!!");
-
 const App = () => {
   return (
     <HashRouter>
@@ -23,7 +21,7 @@ const App = () => {
 
       <main className="container pt-5">
         <Switch>
-          <Route path="/homepage" component={HomePage}></Route>
+          <Route path="/home" component={HomePage}></Route>
           <Route path="/list" component={ListMovie}></Route>
         </Switch>
       </main>
