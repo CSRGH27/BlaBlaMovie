@@ -32,7 +32,7 @@ class FavoriteMovie
     private $poster;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="movies")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="favoritesMovies")
      */
     private $users;
 
@@ -82,7 +82,7 @@ class FavoriteMovie
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addMovies($this);
+            $user->addFavoritesMovie($this);
         }
 
         return $this;
@@ -92,7 +92,7 @@ class FavoriteMovie
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
-            $user->removeMovies($this);
+            $user->removeFavoritesMovie($this);
         }
 
         return $this;
