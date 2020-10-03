@@ -54,7 +54,9 @@ const ListMovie = () => {
               style={{ backgroundImage: `url(${movie.Poster})` }}
               key={movie.imdbID}
               className="card_movie"
-            ></div>
+            >
+              <span className="title_movie">{movie.Title}</span>
+            </div>
           ))
         ) : (
           <h2>Aucun resultat pour votre recherche...</h2>

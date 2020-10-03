@@ -19,12 +19,12 @@ const Navbar = () => {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
             <a className="nav-link" href="#/home">
-              Home <span className="sr-only">(current)</span>
+              Classement des films <span className="sr-only">(current)</span>
             </a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#/list">
-              Classement
+              Liste des films
             </a>
           </li>
         </ul>

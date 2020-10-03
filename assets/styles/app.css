@@ -16,9 +16,27 @@
   height: 350px;
   background-color: aliceblue;
   margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  transition: all 0.7s;
 }
 .grid_ctn {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+.title_movie {
+  color: rgb(255, 0, 0);
+  font-family: "roboto";
+  text-transform: capitalize;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.7s;
+  width: 100%;
+}
+
+.card_movie:hover > .title_movie {
+  background-color: #fff;
+  opacity: 1;
 }
