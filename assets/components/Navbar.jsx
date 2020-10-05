@@ -29,10 +29,10 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <a href="#/inscription" type="button" className="btn btn-primary">
+      <a href="#/inscription" className="btn btn-primary">
         Inscription
       </a>
-      <a type="button" className="btn btn-secondary">
+      <a href="#/connexion" className="btn btn-secondary">
         Connexion
       </a>
     </nav>

@@ -28,17 +28,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank(message="Le pseudo doit etre renseigne")
-     * @Assert\Length(min=3, minMessage="Le pseudo doit faire au moins 3 caracteres",
-     *                max=10, maxMessage="Le pseudo doit faire au maximum 10 caracteres" )
+     * @Assert\NotBlank(message="Le username doit etre renseigne")
+     * @Assert\Length(min=3, minMessage="Le username doit faire au moins 3 caracteres",
+     *                max=10, maxMessage="Le username doit faire au maximum 10 caracteres" )
      */
-    private $pseudo;
+    private $username;
 
     /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
+
+    // FIXME ne pas oublier de cache le mot de passe pour les requet GET de l'api (voir params annotation groups sur api platform)
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
@@ -61,14 +63,10 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
 
-    public function setPseudo(string $pseudo): self
+    public function setUsername(string $username): self
     {
-        $this->pseudo = $pseudo;
+        $this->username = $username;
 
         return $this;
     }
@@ -80,7 +78,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->pseudo;
+        return (string) $this->username;
     }
 
     /**

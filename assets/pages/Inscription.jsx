@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 const Inscription = () => {
   const [user, setuser] = useState({
-    pseudo: "",
+    username: "",
     password: "",
     passwordConfirm: "",
   });
   const [errors, seterrors] = useState({
-    pseudo: "",
+    username: "",
     password: "",
     passwordConfirm: "",
   });
@@ -29,16 +29,13 @@ const Inscription = () => {
     }
 
     try {
-      const response = await axios.post(
-        "https://localhost:8000/api/users",
-        user
-      );
-      history.replace("/list");
+      await axios.post("https://localhost:8000/api/users", user);
       seterrors({});
+
+      history.push("/list");
     } catch (error) {
       const { violations } = error.response.data;
       if (violations) {
-        const apiErrors = {};
         violations.forEach((violation) => {
           apiErrors[violation.propertyPath] = violation.message;
         });
@@ -52,18 +49,18 @@ const Inscription = () => {
       <h1>Inscription</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Pseudo</label>
+          <label>Username</label>
           <input
             type="text"
             className="form-control"
-            name="pseudo"
-            placeholder="Votre jolie pseudo"
-            error={errors.pseudo}
-            value={user.pseudo}
+            name="username"
+            placeholder="Votre jolie username"
+            error={errors.username}
+            value={user.username}
             onChange={handleChange}
           />
           <small id="emailHelp" className="form-text text-muted">
-            {errors.pseudo}
+            {errors.username}
           </small>
         </div>
         <div className="form-group">

@@ -14,6 +14,7 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import ListMovie from "./pages/ListMovie";
 import HomePage from "./pages/HomePage";
 import Inscription from "./pages/Inscription";
+import Connexion from "./pages/Connexion";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
 
       <main className="container pt-5">
         <Switch>
+          <Route path="/connexion" component={Connexion}></Route>
           <Route path="/inscription" component={Inscription}></Route>
           <Route path="/home" component={HomePage}></Route>
           <Route path="/list" component={ListMovie}></Route>
