@@ -18,16 +18,19 @@ const Connexion = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios
+      await axios
         .post("https://127.0.0.1:8000/api/login_check", credentials)
-        .then((response) => response.data.token);
+        .then((response = response));
       seterror("");
       window.localStorage.setItem("authToken", token);
       //   On fill le header evec le token jwt
       axios.defaults.headers["Authorization"] = "Bearer" + token;
     } catch (error) {
-      console.log(error.response);
-      seterror("Aucun compte trouve ou les informations ne correspondent pas");
+      if (error.response) {
+        seterror(
+          "Aucun compte trouve ou les informations ne correspondent pas"
+        );
+      }
     }
   };
 

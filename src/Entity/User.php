@@ -4,18 +4,20 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
 
-/** 
+
+/**
  * @ApiResource
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity("username", message="Un utilisateur avec le meme pseudo existe deja")
  */
 class User implements UserInterface
 {
@@ -23,14 +25,15 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank(message="Le username doit etre renseigne")
-     * @Assert\Length(min=3, minMessage="Le username doit faire au moins 3 caracteres",
-     *                max=10, maxMessage="Le username doit faire au maximum 10 caracteres" )
+     * @Assert\NotBlank(message="Le pseudo doit etre renseigne")
+     * @Assert\Length(min=3, minMessage="Le pseudo doit faire au moins 3 caracteres",
+     *                max=10, maxMessage="Le pseudo doit faire au maximum 10 caracteres" )
      */
     private $username;
 
@@ -39,8 +42,6 @@ class User implements UserInterface
      */
     private $roles = [];
 
-
-    // FIXME ne pas oublier de cache le mot de passe pour les requet GET de l'api (voir params annotation groups sur api platform)
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
@@ -63,14 +64,6 @@ class User implements UserInterface
         return $this->id;
     }
 
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
     /**
      * A visual identifier that represents this user.
      *
@@ -79,6 +72,13 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
     }
 
     /**

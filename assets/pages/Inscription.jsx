@@ -30,16 +30,17 @@ const Inscription = () => {
 
     try {
       await axios.post("https://localhost:8000/api/users", user);
-      seterrors({});
 
-      history.push("/list");
+      seterrors({});
     } catch (error) {
-      const { violations } = error.response.data;
-      if (violations) {
-        violations.forEach((violation) => {
-          apiErrors[violation.propertyPath] = violation.message;
-        });
-        seterrors(apiErrors);
+      if (error.response) {
+        const { violations } = error.response.data;
+        if (violations) {
+          violations.forEach((violation) => {
+            apiErrors[violation.propertyPath] = violation.message;
+          });
+          seterrors(apiErrors);
+        }
       }
     }
   };
