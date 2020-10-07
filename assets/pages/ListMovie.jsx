@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const ListMovie = () => {
+const ListMovie = (isAuthenticated) => {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -53,9 +53,16 @@ const ListMovie = () => {
               key={movie.imdbID}
               className="card_movie"
             >
-              <button type="button" class="btn btn-danger add_to_favorite">
-                Ajouter a vos films favoris
-              </button>
+              {!isAuthenticated ? (
+                <>
+                  <button type="button" class="btn btn-danger add_to_favorite">
+                    Ajouter a vos films favoris
+                  </button>
+                </>
+              ) : (
+                ""
+              )}
+
               <span className="title_movie">{movie.Title}</span>
             </div>
           ))
