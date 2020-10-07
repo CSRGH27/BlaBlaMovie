@@ -16,9 +16,7 @@ const ListMovie = () => {
       .then((res) => {
         setMovies(res.data.Search);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   useEffect(() => {
@@ -55,6 +53,9 @@ const ListMovie = () => {
               key={movie.imdbID}
               className="card_movie"
             >
+              <button type="button" class="btn btn-danger add_to_favorite">
+                Ajouter a vos films favoris
+              </button>
               <span className="title_movie">{movie.Title}</span>
             </div>
           ))

@@ -1,11 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import authAPi from "../services/authAPi";
+import { toast } from "react-toastify";
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated, onLogout, history }) => {
+  /**
+   * Cette fonction appel la fonction de logout puis elle met a jour la props isAuthenticated a false (props passe dans app.js)
+   */
   const handleLogout = () => {
-    console.log("tets");
     authAPi.logout();
+    onLogout(false);
+    toast.info("Vous etes desormais deconnecte ! 😎");
+    history.push("/connexion");
   };
 
   return (
@@ -14,7 +20,7 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarColor01">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <NavLink className="nav-link" to="#/home">
+            <NavLink className="nav-link" to="/home">
               Classement des films
             </NavLink>
           </li>
@@ -25,15 +31,20 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <NavLink to="/inscription" className="btn btn-secondary">
-        Inscription
-      </NavLink>
-      <NavLink to="/connexion" className="btn btn-primary ml-1 ">
-        Connexion
-      </NavLink>
-      <button onClick={handleLogout} className="btn btn-warning ml-1">
-        Deconnexion
-      </button>
+      {!isAuthenticated ? (
+        <>
+          <NavLink to="/inscription" className="btn btn-secondary">
+            Inscription
+          </NavLink>
+          <NavLink to="/connexion" className="btn btn-primary ml-1 ">
+            Connexion
+          </NavLink>
+        </>
+      ) : (
+        <button onClick={handleLogout} className="btn btn-warning ml-1">
+          Deconnexion
+        </button>
+      )}
     </nav>
   );
 };

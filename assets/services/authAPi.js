@@ -16,6 +16,7 @@ function authenticate(credential) {
 
 function logout() {
   window.localStorage.removeItem("authToken");
+  window.localStorage.removeItem("username");
   delete axios.defaults.headers["Authorization"];
 }
 
@@ -37,8 +38,26 @@ function setup() {
   }
 }
 
+/**
+ * Check if user is login when h open the application, on utilise cette fonction pour laffichage des btn navabar a l'ouverture de l'app
+ */
+function isAuthenticated() {
+  const token = window.localStorage.getItem("authToken");
+  if (token) {
+    const dataJwt = jwtDecode(token);
+    if (dataJwt.exp * 1000 > new Date().getTime()) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
 export default {
   authenticate,
   logout,
   setup,
+  isAuthenticated,
 };

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import usersApi from "../services/usersApi";
+import { toast } from "react-toastify";
 
-const Connexion = () => {
+const Connexion = ({ onLogin, history }) => {
   const [credentials, setcredentials] = useState({
     username: "",
     password: "",
@@ -25,14 +25,22 @@ const Connexion = () => {
         .then((token) => {
           seterror("");
           window.localStorage.setItem("authToken", token);
+          window.localStorage.setItem("username", credentials.username);
+          let username = window.localStorage.getItem("username");
           //   On fill le header evec le token jwt
           axios.defaults.headers["Authorization"] = "Bearer " + token;
+          onLogin(true);
+          history.replace("/");
+          toast.success(
+            "Bonjour " + username + " vous etes maintenant connecte ! 😎"
+          );
         });
     } catch (error) {
       if (error.response) {
         seterror(
           "Aucun compte trouve ou les informations ne correspondent pas"
         );
+        toast.error("Une erreur est survenue ! 😵");
       }
     }
   };

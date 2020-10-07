@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-const Inscription = () => {
+import { toast } from "react-toastify";
+
+const Inscription = ({ history }) => {
   const [user, setuser] = useState({
     username: "",
     password: "",
@@ -30,10 +31,12 @@ const Inscription = () => {
 
     try {
       await axios.post("https://localhost:8000/api/users", user);
-
       seterrors({});
+      history.replace("/connexion");
+      toast.success("Vous etes desormais inscrit, vous puvez vous connecte !");
     } catch (error) {
       if (error.response) {
+        toast.error("Des erreurs dasn votre formulaire ! 🙁");
         const { violations } = error.response.data;
         if (violations) {
           violations.forEach((violation) => {
