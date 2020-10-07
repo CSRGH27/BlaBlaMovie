@@ -1,40 +1,39 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import authAPi from "../services/authAPi";
+
 const Navbar = () => {
+  const handleLogout = () => {
+    console.log("tets");
+    authAPi.logout();
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand title-navbar" href="#/"></a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarColor01"
-        aria-controls="navbarColor01"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
       <div className="collapse navbar-collapse" id="navbarColor01">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <a className="nav-link" href="#/home">
-              Classement des films <span className="sr-only">(current)</span>
-            </a>
+            <NavLink className="nav-link" to="#/home">
+              Classement des films
+            </NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#/list">
+            <NavLink className="nav-link" to="/list">
               Liste des films
-            </a>
+            </NavLink>
           </li>
         </ul>
       </div>
-      <a href="#/inscription" className="btn btn-primary">
+      <NavLink to="/inscription" className="btn btn-secondary">
         Inscription
-      </a>
-      <a href="#/connexion" className="btn btn-secondary">
+      </NavLink>
+      <NavLink to="/connexion" className="btn btn-primary ml-1 ">
         Connexion
-      </a>
+      </NavLink>
+      <button onClick={handleLogout} className="btn btn-warning ml-1">
+        Deconnexion
+      </button>
     </nav>
   );
 };

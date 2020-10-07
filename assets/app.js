@@ -15,6 +15,12 @@ import ListMovie from "./pages/ListMovie";
 import HomePage from "./pages/HomePage";
 import Inscription from "./pages/Inscription";
 import Connexion from "./pages/Connexion";
+import authAPi from "./services/authAPi";
+
+/**
+ * On appel la fonxtion setup au start de l'app
+ */
+authAPi.setup();
 
 const App = () => {
   return (

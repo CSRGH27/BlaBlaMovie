@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import usersApi from "../services/usersApi";
 
 const Connexion = () => {
   const [credentials, setcredentials] = useState({
@@ -20,11 +21,13 @@ const Connexion = () => {
     try {
       await axios
         .post("https://127.0.0.1:8000/api/login_check", credentials)
-        .then((response = response));
-      seterror("");
-      window.localStorage.setItem("authToken", token);
-      //   On fill le header evec le token jwt
-      axios.defaults.headers["Authorization"] = "Bearer" + token;
+        .then((response) => response.data.token)
+        .then((token) => {
+          seterror("");
+          window.localStorage.setItem("authToken", token);
+          //   On fill le header evec le token jwt
+          axios.defaults.headers["Authorization"] = "Bearer " + token;
+        });
     } catch (error) {
       if (error.response) {
         seterror(
