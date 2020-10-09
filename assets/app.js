@@ -27,7 +27,7 @@ authAPi.setup();
 
 const App = () => {
   const [authenticated, setAuthenticated] = useState(authAPi.isAuthenticated());
-  console.log(window);
+
   /**
    * On cree cette const pour que navbar est les memes propriete qu'une route (ex: history)
    */

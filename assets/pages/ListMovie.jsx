@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Pagination from "../components/Pagination";
 
 const ListMovie = (isAuthenticated) => {
   const [movies, setMovies] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("digital");
+  const [length, setlength] = useState('')
+  const [currentPage, setcurrentPage] = useState(1)
 
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
+
+  const handlePage = (page) => {
+    setcurrentPage(page)
+    axios
+      .get("https://www.omdbapi.com/?apikey=ced60dbd&page=2&type=movie&s=" + search+"&p="+currentPage)
+      .then((res) => {
+
+        setMovies(res.data.Search);
+      })
+  }
+
   const callSearchFunction = (e) => {
     e.preventDefault();
     search;
     axios
-      .get("https://www.omdbapi.com/?apikey=ced60dbd&type=movie&s=" + search)
+      .get("https://www.omdbapi.com/?apikey=ced60dbd&page=2&type=movie&s=" + search+"&p="+currentPage)
       .then((res) => {
+
         setMovies(res.data.Search);
       })
       .catch((error) => {});
@@ -22,9 +37,14 @@ const ListMovie = (isAuthenticated) => {
   useEffect(() => {
     axios
       .get("https://www.omdbapi.com/?apikey=ced60dbd&type=movie&s=digital")
-      .then((res) => res.data.Search)
-      .then((data) => setMovies(data));
+      .then((res) => {
+        setlength(res.data.totalResults) 
+        setMovies(res.data.Search)
+      })
+       
   }, []);
+
+ 
 
   return (
     <>
@@ -70,6 +90,7 @@ const ListMovie = (isAuthenticated) => {
           <h2>Aucun resultat pour votre recherche...</h2>
         )}
       </div>
+      <Pagination length={length} currentPage={currentPage}  onPageChange={handlePage}  />
     </>
   );
 };
