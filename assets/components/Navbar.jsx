@@ -41,10 +41,11 @@ const Navbar = ({ isAuthenticated, onLogout, history }) => {
           </NavLink>
         </>
       ) : (
-        <button onClick={handleLogout} className="btn btn-warning ml-1">
-          Deconnexion
-        </button>
-      )}
+
+          <button onClick={handleLogout} className="btn btn-warning ml-1">
+            Deconnexion
+          </button>
+        )}
     </nav>
   );
 };

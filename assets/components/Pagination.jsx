@@ -5,7 +5,7 @@ const Pagination = ({ length, currentPage, onPageChange }) => {
     const itemsPerPage = 10;
     const pagesCount = Math.ceil(length / itemsPerPage)
     const page = [];
-    console.log(currentPage);
+    
     for (let i = 1; i < pagesCount; i++) {
         page.push(i)
     }
@@ -14,7 +14,7 @@ const Pagination = ({ length, currentPage, onPageChange }) => {
             <ul className="pagination">
                 <li className="page-item disabled">
                     <button className="page-link"
-                        disabled={currentPage === 1}
+                        disabled={currentPage == 1}
                         onClick={() => onPageChange(currentPage - 1)}>&laquo;</button>
                 </li>
                 {page.map((page) => (

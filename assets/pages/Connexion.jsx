@@ -20,7 +20,7 @@ const Connexion = ({ onLogin, history }) => {
     e.preventDefault();
     try {
       await axios
-        .post("https://127.0.0.1:8000/api/login_check", credentials)
+		.post("https://127.0.0.1:8000/api/login_check", credentials)
         .then((response) => response.data.token)
         .then((token) => {
           seterror("");
@@ -30,7 +30,7 @@ const Connexion = ({ onLogin, history }) => {
           //   On fill le header evec le token jwt
           axios.defaults.headers["Authorization"] = "Bearer " + token;
           onLogin(true);
-          history.replace("/");
+    history.replace("/");
           toast.success(
             "Bonjour " + username + " vous etes maintenant connecte ! 😎"
           );
