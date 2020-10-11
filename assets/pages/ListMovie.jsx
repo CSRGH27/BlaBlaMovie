@@ -6,7 +6,7 @@ const ListMovie = (isAuthenticated) => {
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState("digital");
     const [length, setlength] = useState('')
-    const [currentPage, setcurrentPage] = useState('1')
+    const [currentPage, setcurrentPage] = useState(1)
 
     const handleChange = (e) => {
         setSearch(e.target.value);

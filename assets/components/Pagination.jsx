@@ -12,9 +12,9 @@ const Pagination = ({ length, currentPage, onPageChange }) => {
     return (
         <><div>
             <ul className="pagination">
-                <li className="page-item disabled">
+                <li className="page-item">
                     <button className="page-link"
-                        disabled={currentPage == 1}
+                        disabled={currentPage === 1}
                         onClick={() => onPageChange(currentPage - 1)}>&laquo;</button>
                 </li>
                 {page.map((page) => (
