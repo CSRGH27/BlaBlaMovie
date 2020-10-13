@@ -5,10 +5,16 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FavoriteMovieRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass=FavoriteMovieRepository::class)
+ * @UniqueEntity(
+ *      fields={"idmovie", "user"},
+ *      errorPath="idmovie",
+ *      message="Vous avez deja ajoute ce film a vos favoris")
  */
 class FavoriteMovie
 {

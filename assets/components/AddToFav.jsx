@@ -18,16 +18,16 @@ const AddToFav = ({ title, poster, id }) => {
 			await axios.post("https://localhost:8000/api/favorite_movies", favoriteMovie);
 			toast.success("Le film " + favoriteMovie.title + " a bien ete ajoute a vos favoris");
 		} catch (error) {
-            console.log(error.response)
 			if (error.response) {
-				toast.error("Oh une erreur est survenu ! 🙁");
+				
 				const { violations } = error.response.data;
 				if (violations) {
-					violations.forEach((violation) => {
-						apiErrors[violation.propertyPath] = violation.message;
-					});
-					seterrors(apiErrors);
-				}
+					violations.forEach(violation => {
+                        toast.error(violation.message)
+                    });
+				}else{
+                    toast.error("Oh une erreur est survenu ! 🙁");
+                }
 			}
 		}
         
