@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Pagination from "../components/Pagination";
+import AddToFav from "../components/AddToFav";
 
-const ListMovie = (isAuthenticated) => {
+const ListMovie = ({ isAuthenticated }) => {
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState("digital");
     const [length, setlength] = useState('')
@@ -12,16 +13,15 @@ const ListMovie = (isAuthenticated) => {
         setSearch(e.target.value);
     };
 
-
     /**
      * Gstion de la pagination
      * 
      * @param {number} page 
      */
-    const handlePage =  (page) => {
+    const handlePage = (page) => {
         axios
             .get("https://www.omdbapi.com/?apikey=ced60dbd&type=movie&s=" + search + "&page=" + page)
-            .then((res) => { 
+            .then((res) => {
                 setMovies(res.data.Search);
                 setcurrentPage(page);
             })
@@ -30,9 +30,9 @@ const ListMovie = (isAuthenticated) => {
     const callSearchFunction = (e) => {
         e.preventDefault();
         axios
-            .get("https://www.omdbapi.com/?apikey=ced60dbd&type=movie&s=" + search + "&page=1" )
+            .get("https://www.omdbapi.com/?apikey=ced60dbd&type=movie&s=" + search + "&page=1")
             .then((res) => {
-                
+
                 setMovies(res.data.Search);
                 setcurrentPage(1)
             })
@@ -40,6 +40,7 @@ const ListMovie = (isAuthenticated) => {
     };
 
     useEffect(() => {
+        delete axios.defaults.headers["Authorization"];
         axios
             .get("https://www.omdbapi.com/?apikey=ced60dbd&type=movie&s=" + search + "&page=" + currentPage)
             .then((res) => {
@@ -78,12 +79,8 @@ const ListMovie = (isAuthenticated) => {
                             key={movie.imdbID}
                             className="card_movie"
                         >
-                            {!isAuthenticated ? (
-                                <>
-                                    <button type="button" class="btn btn-danger add_to_favorite">
-                                        Ajouter a vos films favoris
-                  </button>
-                                </>
+                            {isAuthenticated ? (
+                                <AddToFav title={movie.Title} poster={movie.Poster} id={movie.imdbID} />
                             ) : (
                                     ""
                                 )}

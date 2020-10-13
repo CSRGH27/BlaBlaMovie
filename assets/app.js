@@ -27,12 +27,11 @@ authAPi.setup();
 
 const App = () => {
   const [authenticated, setAuthenticated] = useState(authAPi.isAuthenticated());
-
   /**
    * On cree cette const pour que navbar est les memes propriete qu'une route (ex: history)
    */
   const NavbarWithRouter = withRouter(Navbar);
-
+  
   return (
     <HashRouter>
       <NavbarWithRouter
@@ -50,7 +49,12 @@ const App = () => {
           ></Route>
           <Route path="/inscription" component={Inscription}></Route>
           <Route path="/home" component={HomePage}></Route>
-          <Route path="/list" component={ListMovie}></Route>
+          <Route
+            path="/list"
+            render={(props) =>(
+              <ListMovie  isAuthenticated={authenticated}/>
+            )}
+          ></Route>
         </Switch>
       </main>
       <ToastContainer position={toast.POSITION.TOP_LEFT} />

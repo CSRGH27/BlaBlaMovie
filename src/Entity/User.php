@@ -22,9 +22,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer", unique=true)
      * 
      */
     private $id;
@@ -50,14 +50,17 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\ManyToMany(targetEntity=FavoriteMovie::class, inversedBy="users")
+     * @ORM\OneToMany(targetEntity=FavoriteMovie::class, mappedBy="user", orphanRemoval=true)
      */
-    private $favoritesMovies;
+    private $favoriteMovies;
 
     public function __construct()
     {
-        $this->favoritesMovies = new ArrayCollection();
+        $this->favoriteMovies = new ArrayCollection();
     }
+
+
+
 
     public function getId(): ?int
     {
@@ -135,24 +138,29 @@ class User implements UserInterface
     /**
      * @return Collection|FavoriteMovie[]
      */
-    public function getFavoritesMovies(): Collection
+    public function getFavoriteMovies(): Collection
     {
-        return $this->favoritesMovies;
+        return $this->favoriteMovies;
     }
 
-    public function addFavoritesMovie(FavoriteMovie $favoritesMovie): self
+    public function addFavoriteMovie(FavoriteMovie $favoriteMovie): self
     {
-        if (!$this->favoritesMovies->contains($favoritesMovie)) {
-            $this->favoritesMovies[] = $favoritesMovie;
+        if (!$this->favoriteMovies->contains($favoriteMovie)) {
+            $this->favoriteMovies[] = $favoriteMovie;
+            $favoriteMovie->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeFavoritesMovie(FavoriteMovie $favoritesMovie): self
+    public function removeFavoriteMovie(FavoriteMovie $favoriteMovie): self
     {
-        if ($this->favoritesMovies->contains($favoritesMovie)) {
-            $this->favoritesMovies->removeElement($favoritesMovie);
+        if ($this->favoriteMovies->contains($favoriteMovie)) {
+            $this->favoriteMovies->removeElement($favoriteMovie);
+            // set the owning side to null (unless already changed)
+            if ($favoriteMovie->getUser() === $this) {
+                $favoriteMovie->setUser(null);
+            }
         }
 
         return $this;

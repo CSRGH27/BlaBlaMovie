@@ -57,6 +57,6 @@ security:
     access_control:
         # TODOIci on affine lacces a l'api on permet lacces a la doc donc /api par contre on empeche les methodes get put delete, on laisse la methode post pour les users pour la creation
         - { path: ^/api/users   , roles: IS_AUTHENTICATED_FULLY, methods: [GET, PUT, DELETE] }
-        - { path: ^/api/favorite_movie   , roles: IS_AUTHENTICATED_FULLY }
+        # - { path: ^/api/favorite_movie   , roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         # - { path: ^/profile, roles: ROLE_USER }

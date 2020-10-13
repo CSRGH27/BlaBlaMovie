@@ -42,9 +42,9 @@ const Navbar = ({ isAuthenticated, onLogout, history }) => {
         </>
       ) : (
           <>
-          <span>Bonjour {window.localStorage.getItem("username")}</span>
-          <button onClick={handleLogout} className="btn btn-warning ml-1">
-            Deconnexion
+            <span>Bonjour {window.localStorage.getItem("username")}</span>
+            <button onClick={handleLogout} className="btn btn-warning ml-1">
+              Deconnexion
           </button>
           </>
         )}

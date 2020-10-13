@@ -6,14 +6,16 @@ namespace App\Controller;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\Security\Core\Security;
 
 class FrontController extends AbstractController
 {
     private $client;
+    private $security;
 
-    public function __construct(HttpClientInterface $client)
+    public function __construct(HttpClientInterface $client, Security $security)
     {
+        $this->security = $security;
         $this->client = $client;
     }
 
@@ -30,7 +32,8 @@ class FrontController extends AbstractController
         // $baseUri = "http://www.omdbapi.com/";
         // $response = $this->client->request('GET', $baseUri . '?apikey=' . $apiKeys . '&type=movie&s=digital&school');
 
-
+        $user = $this->security->getToken();
+        dump($user);
 
 
         return $this->render(

@@ -4,12 +4,10 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FavoriteMovieRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=FavoriteMovieRepository::class)
  */
 class FavoriteMovie
@@ -27,20 +25,20 @@ class FavoriteMovie
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $poster;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="favoritesMovies")
+     * @ORM\Column(type="string", length=255)
      */
-    private $users;
+    private $idmovie;
 
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
-
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="favoriteMovies")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -64,37 +62,33 @@ class FavoriteMovie
         return $this->poster;
     }
 
-    public function setPoster(string $poster): self
+    public function setPoster(?string $poster): self
     {
         $this->poster = $poster;
 
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
+    public function getIdmovie(): ?string
     {
-        return $this->users;
+        return $this->idmovie;
     }
 
-    public function addUser(User $user): self
+    public function setIdmovie(string $idmovie): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addFavoritesMovie($this);
-        }
+        $this->idmovie = $idmovie;
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function getUser(): ?User
     {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            $user->removeFavoritesMovie($this);
-        }
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
