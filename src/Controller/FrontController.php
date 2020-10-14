@@ -32,10 +32,6 @@ class FrontController extends AbstractController
         // $baseUri = "http://www.omdbapi.com/";
         // $response = $this->client->request('GET', $baseUri . '?apikey=' . $apiKeys . '&type=movie&s=digital&school');
 
-        $user = $this->security->getToken();
-        dump($user);
-
-
         return $this->render(
             'app/index.html.twig',
             ['test' => $apiKeys]
