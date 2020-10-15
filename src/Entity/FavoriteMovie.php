@@ -43,7 +43,7 @@ class FavoriteMovie
     private $idmovie;
 
     /**
-     * @MaxMovies
+     * 
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="favoriteMovies")
      * @ORM\JoinColumn(nullable=false)
      */

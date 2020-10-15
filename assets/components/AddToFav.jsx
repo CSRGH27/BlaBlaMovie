@@ -1,27 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { FAV_URL_API } from "../config";
 
-const token = window.localStorage.getItem("authToken");
 const AddToFav = ({ title, poster, id }) => {
   const [favoriteMovie, setfavoriteMovie] = useState({
     poster: poster,
     title: title,
     idmovie: id,
   });
+  const token = window.localStorage.getItem("authToken");
+  console.log(FAV_URL_API);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       axios.defaults.headers["Authorization"] = "Bearer " + token;
-      await axios.post(
-        "https://localhost:8000/api/favorite_movies",
-        favoriteMovie,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
+      await axios.post(FAV_URL_API, favoriteMovie);
       toast.success(
         "Le film " + favoriteMovie.title + " a bien ete ajoute a vos favoris"
       );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { LOG_URL_API } from "../config";
 
 const Connexion = ({ onLogin, history }) => {
   const [credentials, setcredentials] = useState({
@@ -20,11 +21,13 @@ const Connexion = ({ onLogin, history }) => {
     e.preventDefault();
     try {
       await axios
-        .post("https://127.0.0.1:8000/api/login_check", credentials)
+        .post(LOG_URL_API, credentials)
         .then((response) => response.data.token)
         .then((token) => {
           seterror("");
           window.localStorage.setItem("authToken", token);
+          window.localStorage.setItem("username", credentials.username);
+          let username = window.localStorage.getItem("username");
           //   On fill le header evec le token jwt
           axios.defaults.headers["Authorization"] = "Bearer " + token;
           onLogin(true);
