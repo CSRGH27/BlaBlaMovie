@@ -32,7 +32,7 @@ security:
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
 
-        # TODO Ici on ferme lacces a lurl de l'api avec un firewall il faut donc etre connecte pour acceder au ressources 
+        # TODO Ici on ferme lacces a lurl de l'api avec un firewall il faut donc etre connecte pour acceder au ressources !
         api:
             pattern:   ^/api
             stateless: true
