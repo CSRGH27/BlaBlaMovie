@@ -19,6 +19,7 @@ import authAPi from "./services/authAPi";
 import authContext from "./contexts/authContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FavoriteMovies from "./pages/FavoriteMovies";
 
 /**
  * On appel la fonxtion setup au start de l'app
@@ -31,7 +32,7 @@ const App = () => {
    * On cree cette const pour que navbar est les memes propriete qu'une route (ex: history)
    */
   const NavbarWithRouter = withRouter(Navbar);
-  
+
   return (
     <HashRouter>
       <NavbarWithRouter
@@ -49,11 +50,10 @@ const App = () => {
           ></Route>
           <Route path="/inscription" component={Inscription}></Route>
           <Route path="/home" component={HomePage}></Route>
+          <Route path="/fav" component={FavoriteMovies}></Route>
           <Route
             path="/list"
-            render={(props) =>(
-              <ListMovie  isAuthenticated={authenticated}/>
-            )}
+            render={(props) => <ListMovie isAuthenticated={authenticated} />}
           ></Route>
         </Switch>
       </main>

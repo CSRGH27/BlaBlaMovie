@@ -29,6 +29,11 @@ const Navbar = ({ isAuthenticated, onLogout, history }) => {
               Liste des films
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/fav">
+              Mes films favoris
+            </NavLink>
+          </li>
         </ul>
       </div>
       {!isAuthenticated ? (
@@ -41,13 +46,13 @@ const Navbar = ({ isAuthenticated, onLogout, history }) => {
           </NavLink>
         </>
       ) : (
-          <>
-            <span>Bonjour {window.localStorage.getItem("username")}</span>
-            <button onClick={handleLogout} className="btn btn-warning ml-1">
-              Deconnexion
+        <>
+          <span>Bonjour {window.localStorage.getItem("username")}</span>
+          <button onClick={handleLogout} className="btn btn-warning ml-1">
+            Deconnexion
           </button>
-          </>
-        )}
+        </>
+      )}
     </nav>
   );
 };
