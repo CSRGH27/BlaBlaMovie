@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { LOG_URL_API } from "../config";
-console.log(LOG_URL_API);
 const Connexion = ({ onLogin, history }) => {
   const [credentials, setcredentials] = useState({
     username: "",

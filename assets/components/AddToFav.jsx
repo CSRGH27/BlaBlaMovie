@@ -10,7 +10,6 @@ const AddToFav = ({ title, poster, id }) => {
     idmovie: id,
   });
   const token = window.localStorage.getItem("authToken");
-  console.log(FAV_URL_API);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

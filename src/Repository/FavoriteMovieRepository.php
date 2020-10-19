@@ -47,4 +47,13 @@ class FavoriteMovieRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function countFavFilmPerUser($user){
+        return $this->createQueryBuilder('fm')
+            ->andWhere('fm.user = :user')
+            ->setParameter('user', $user)
+            ->select('count(fm.id)')
+            ->getQuery()
+            ->getSingleResult();
+    }
 }

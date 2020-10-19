@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FavoriteMovieRepository;
-use App\Validator\Constraints\MaxMovies;
+use App\Validator\MaxMovies;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -43,7 +43,7 @@ class FavoriteMovie
     private $idmovie;
 
     /**
-     * 
+     * @MaxMovies
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="favoriteMovies")
      * @ORM\JoinColumn(nullable=false)
      */
